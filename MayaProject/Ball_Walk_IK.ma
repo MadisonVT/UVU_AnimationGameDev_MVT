@@ -1,6 +1,6 @@
 //Maya ASCII 2025ff03 scene
 //Name: Ball_Walk_IK.ma
-//Last modified: Sun, Oct 05, 2025 11:47:23 PM
+//Last modified: Mon, Oct 06, 2025 11:08:16 AM
 //Codeset: 1252
 file -rdi 1 -ns "Ultimate_Walker_FK_v1_0_1__1_" -rfn "Ultimate_Walker_FK_v1_0_1__1_RN"
 		 -op "v=0;" -typ "mayaAscii" "C:/Users/madis/OneDrive/Desktop/Ultimate_Walker_FK_v1.0.1 (1).ma";
@@ -17,12 +17,12 @@ fileInfo "product" "Maya 2025";
 fileInfo "version" "2025";
 fileInfo "cutIdentifier" "202505300603-a12e894a3d";
 fileInfo "osv" "Windows 11 Home v2009 (Build: 26100)";
-fileInfo "UUID" "53F3E71F-453A-6CAE-D285-188E9A95902B";
+fileInfo "UUID" "99101042-4DD3-F0A7-7277-86AC06860697";
 createNode transform -s -n "persp";
 	rename -uid "66597005-42DB-9EF5-350C-C788A1A1D4B0";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 5.3932858329336613 5.3298716140120446 -11.876323430434047 ;
-	setAttr ".r" -type "double3" -13.538352729155108 512.59999999954493 0 ;
+	setAttr ".t" -type "double3" 8.3525547202464985 4.7838001359794031 -9.9336110012124728 ;
+	setAttr ".r" -type "double3" -11.138352729154747 496.99999999949682 0 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "32161708-4263-7722-8A76-1BB7C1554A57";
 	setAttr -k off ".v" no;
@@ -96,20 +96,20 @@ createNode mesh -n "pPlaneShape1" -p "pPlane1";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "FF9C48C8-4B72-BF49-78D8-639FC4544D13";
+	rename -uid "40DE367D-40CD-AEEB-B07E-B9B9175EF88B";
 	setAttr -s 5 ".lnk";
 	setAttr -s 5 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "D33C165A-461D-C307-E7A4-6981135EAAEC";
+	rename -uid "1815548B-46F5-3019-F35C-87AC48697681";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "F07BD289-4C7B-E27C-BC80-E9B7A0DC42FD";
+	rename -uid "2C0D7E6F-4D25-F1FC-7B86-74B8D4C68BA3";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "3CC92824-45B7-EBE3-F6C2-5DB34C9E7002";
+	rename -uid "D534FF5E-45C3-0C3F-7CDA-26AF693C36B2";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "DBCEFB32-4026-3877-8E17-5C8D12FF2434";
 	setAttr ".ufem" -type "stringArray" 0  ;
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "C1EDF1B9-4A4D-B827-653E-9EABDC631F11";
+	rename -uid "786E4C4B-457E-59C0-5DC7-24A751CB77E2";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "ED9EBCCC-45D5-2CD4-A380-D8AFFF783B50";
 	setAttr ".g" yes;
@@ -276,7 +276,7 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"UV Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"renderWindowPanel\" (localizedPanelLabel(\"Render View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Render View\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"shapePanel\" (localizedPanelLabel(\"Shape Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tshapePanel -edit -l (localizedPanelLabel(\"Shape Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"posePanel\" (localizedPanelLabel(\"Pose Editor\")) `;\n\tif (\"\" != $panelName) {\n"
 		+ "\t\t$label = `panel -q -label $panelName`;\n\t\tposePanel -edit -l (localizedPanelLabel(\"Pose Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynRelEdPanel\" (localizedPanelLabel(\"Dynamic Relationships\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Dynamic Relationships\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"relationshipPanel\" (localizedPanelLabel(\"Relationship Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Relationship Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"referenceEditorPanel\" (localizedPanelLabel(\"Reference Editor\")) `;\n"
 		+ "\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Reference Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynPaintScriptedPanelType\" (localizedPanelLabel(\"Paint Effects\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Paint Effects\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"scriptEditorPanel\" (localizedPanelLabel(\"Script Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Script Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"profilerPanel\" (localizedPanelLabel(\"Profiler Tool\")) `;\n"
-		+ "\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Profiler Tool\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"contentBrowserPanel\" (localizedPanelLabel(\"Content Browser\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Content Browser\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"Stereo\" (localizedPanelLabel(\"Stereo\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Stereo\")) -mbv $menusOkayInPanels  $panelName;\n{ string $editorName = ($panelName+\"Editor\");\n            stereoCameraView -e \n                -camera \"|:persp\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n"
+		+ "\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Profiler Tool\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"contentBrowserPanel\" (localizedPanelLabel(\"Content Browser\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Content Browser\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"Stereo\" (localizedPanelLabel(\"Stereo\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Stereo\")) -mbv $menusOkayInPanels  $panelName;\n{ string $editorName = ($panelName+\"Editor\");\n            stereoCameraView -e \n                -camera \"|persp\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n"
 		+ "                -displayAppearance \"wireframe\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -holdOuts 1\n                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 1\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -depthOfFieldPreview 1\n"
 		+ "                -maxConstantTransparency 1\n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -controllers 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n"
 		+ "                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n                -deformers 1\n                -dynamics 1\n                -particleInstancers 1\n                -fluids 1\n                -hairSystems 1\n                -follicles 1\n                -nCloths 1\n                -nParticles 1\n                -nRigids 1\n                -dynamicConstraints 1\n                -locators 1\n                -manipulators 1\n                -pluginShapes 1\n                -dimensions 1\n                -handles 1\n                -pivots 1\n                -textures 1\n                -strokes 1\n                -motionTrails 1\n                -clipGhosts 1\n                -bluePencil 1\n                -greasePencils 0\n                -shadows 0\n                -captureSequenceNumber -1\n                -width 0\n                -height 0\n                -sceneRenderFilter 0\n                -displayMode \"centerEye\" \n"
@@ -287,7 +287,7 @@ createNode script -n "uiConfigurationScriptNode";
 	setAttr ".st" 3;
 createNode script -n "sceneConfigurationScriptNode";
 	rename -uid "77687FFA-4F9E-17F1-0802-908EA3CA61F4";
-	setAttr ".b" -type "string" "playbackOptions -min 0 -max 22 -ast 0 -aet 24 ";
+	setAttr ".b" -type "string" "playbackOptions -min 0 -max 21 -ast 0 -aet 24 ";
 	setAttr ".st" 6;
 createNode animCurveTL -n "CTRL_Main_translateX";
 	rename -uid "804B0175-4443-25F5-80DB-62B9BADA5E93";
@@ -384,13 +384,13 @@ createNode animCurveTA -n "walker_rt_upLeg_fk_ctrl_rotateX";
 	setAttr ".tan" 29;
 	setAttr ".wgt" no;
 	setAttr -s 7 ".ktv[0:6]"  0 13.566192183504297 3 12.5501958861723
-		 6 0 9 -1.3964196210922128 12 -4.9841121102929371 18 0 21 11.624669836881974;
+		 6 0 9 -1.3964196210922128 12 -4.9841121102929371 18 0 21 11.624669836881976;
 createNode animCurveTA -n "walker_rt_upLeg_fk_ctrl_rotateY";
 	rename -uid "CA79E75C-4506-E95F-EB84-15A065C44334";
 	setAttr ".tan" 29;
 	setAttr ".wgt" no;
 	setAttr -s 7 ".ktv[0:6]"  0 -11.572939978357635 3 -3.7590199559678719
-		 6 0 9 -4.9630555471834104 12 1.987846675914698e-16 18 0 21 -3.4634010248468834;
+		 6 0 9 -4.9630555471834104 12 1.987846675914698e-16 18 0 21 -3.4634010248468838;
 createNode animCurveTA -n "walker_rt_upLeg_fk_ctrl_rotateZ";
 	rename -uid "856BC013-4778-78F4-6F6C-72834FBB915C";
 	setAttr ".tan" 29;
@@ -432,7 +432,7 @@ createNode animCurveTA -n "walker_lf_ball_fk_ctrl_rotateZ";
 	setAttr ".tan" 29;
 	setAttr ".wgt" no;
 	setAttr -s 6 ".ktv[0:5]"  0 -14.445720516221355 3 0.89428793275497187
-		 9 -9.0682485956633787 12 -35.062777450911078 15 1.576830280764679 21 13.381443234039779;
+		 9 -9.0682485956633787 12 -35.062777450911078 15 1.576830280764679 21 13.38144323403978;
 createNode animCurveTA -n "walker_rt_ankle_fk_ctrl_rotateX";
 	rename -uid "DB1701C9-4EAC-EA43-C9AB-61A71EDD35A8";
 	setAttr ".tan" 29;
@@ -499,8 +499,7 @@ createNode shadingEngine -n "lambert2SG";
 createNode materialInfo -n "materialInfo1";
 	rename -uid "9F135322-4F8F-76FB-8A40-1CAD02500D22";
 select -ne :time1;
-	setAttr ".o" 19;
-	setAttr ".unw" 19;
+	setAttr ".o" 0;
 select -ne :hardwareRenderingGlobals;
 	setAttr ".otfna" -type "stringArray" 22 "NURBS Curves" "NURBS Surfaces" "Polygons" "Subdiv Surface" "Particles" "Particle Instance" "Fluids" "Strokes" "Image Planes" "UI" "Lights" "Cameras" "Locators" "Joints" "IK Handles" "Deformers" "Motion Trails" "Components" "Hair Systems" "Follicles" "Misc. UI" "Ornaments"  ;
 	setAttr ".otfva" -type "Int32Array" 22 0 1 1 1 1 1
@@ -545,6 +544,7 @@ select -ne :hardwareRenderGlobals;
 	setAttr ".ctrs" 256;
 	setAttr ".btrs" 512;
 select -ne :ikSystem;
+	setAttr -s 4 ".sol";
 connectAttr "walker_lf_ball_fk_ctrl_rotateX.o" "Ultimate_Walker_FK_v1_0_1__1_RN.phl[1]"
 		;
 connectAttr "walker_lf_ball_fk_ctrl_rotateZ.o" "Ultimate_Walker_FK_v1_0_1__1_RN.phl[2]"
