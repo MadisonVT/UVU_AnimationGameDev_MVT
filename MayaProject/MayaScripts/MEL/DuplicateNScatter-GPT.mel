@@ -1,0 +1,63 @@
+
+global proc duplicateAndScatter(int $numDuplicates, float $minX, float $maxX, float $minY, float $maxY, float $minZ, float $maxZ)
+{
+    string $selection[] = `ls -sl`;
+
+    if (size($selection) == 0) {
+        warning "Please select at least one object to duplicate.";
+        return;
+    }
+
+    for ($obj in $selection) {
+        for ($i = 0; $i < $numDuplicates; $i++)
+        {
+            string $dup[] = `duplicate $obj`;
+
+            float $randX = `rand $minX $maxX`;
+            float $randY = `rand $minY $maxY`;
+            float $randZ = `rand $minZ $maxZ`;
+
+
+            move $randX $randY $randZ $dup[0];
+        }
+    }
+
+    print ("Duplicated and scattered " + $numDuplicates + " copies of each selected object.\n");
+}
+
+global proc duplicateScatterUI()
+{
+    if (`window -exists duplicateScatterWin`)
+        deleteUI duplicateScatterWin;
+
+    window -title "Duplicate and Scatter Tool" -widthHeight 300 400 duplicateScatterWin;
+    columnLayout -adjustableColumn true;
+
+    text -label "Number of Duplicates:";
+    intField -value 5 numDupField;
+
+    separator -height 10;
+
+    text -label "X Range (min / max):";
+    floatFieldGrp -numberOfFields 2 -value1 -10 -value2 10 xRangeField;
+
+    text -label "Y Range (min / max):";
+    floatFieldGrp -numberOfFields 2 -value1 0 -value2 10 yRangeField;
+
+    text -label "Z Range (min / max):";
+    floatFieldGrp -numberOfFields 2 -value1 -10 -value2 10 zRangeField;
+
+    separator -height 15;
+
+    button -label "Duplicate and Scatter" -bgc 0.3 0.6 0.3 
+        -command ("int $num = `intField -q -value numDupField`; " +
+                  "float $xVals[] = `floatFieldGrp -q -value xRangeField`; " +
+                  "float $yVals[] = `floatFieldGrp -q -value yRangeField`; " +
+                  "float $zVals[] = `floatFieldGrp -q -value zRangeField`; " +
+                  "duplicateAndScatter($num, $xVals[0], $xVals[1], $yVals[0], $yVals[1], $zVals[0], $zVals[1]);");
+
+    separator -height 10;
+    button -label "Close" -command "deleteUI duplicateScatterWin";
+
+    showWindow duplicateScatterWin;
+}

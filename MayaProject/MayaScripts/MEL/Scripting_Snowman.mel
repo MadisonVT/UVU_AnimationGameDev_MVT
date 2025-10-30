@@ -1,0 +1,13 @@
+polySphere -r 2.5;
+move 0 2.5 0;
+polySphere -r 1.7;
+move 0 6 0;
+polySphere -r 1.2;
+move 0 8.5 0;
+polyCone -r 0.3;
+move 0 8.5 2;
+rotate 90 0 0;
+polySphere -r 0.2;
+move -0.5 9 1;
+polySphere -r 0.2;
+move 0.5 9 1;

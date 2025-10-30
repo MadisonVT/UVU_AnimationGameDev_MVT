@@ -1,0 +1,198 @@
+// ================================================
+// MEL List Calculator — Compatible UI Version
+// ================================================
+
+global string $calcDisplay;
+global string $calcOperation = "Addition";
+
+// ------------------
+// Math Functions
+// ------------------
+global proc float Addition(float $input[])
+{
+    float $result = 0;
+    for ($i = 0; $i < size($input); $i++)
+        $result += $input[$i];
+    return $result;
+}
+
+global proc float Subtraction(float $input[])
+{
+    float $result = $input[0];
+    for ($i = 1; $i < size($input); $i++)
+        $result -= $input[$i];
+    return $result;
+}
+
+global proc float Multiplication(float $input[])
+{
+    float $result = 1;
+    for ($i = 0; $i < size($input); $i++)
+        $result *= $input[$i];
+    return $result;
+}
+
+global proc float Division(float $input[])
+{
+    float $result = $input[0];
+    for ($i = 1; $i < size($input); $i++)
+    {
+        if ($input[$i] != 0)
+            $result /= $input[$i];
+        else
+            warning("Division by zero skipped.");
+    }
+    return $result;
+}
+
+global proc float Power(float $input[])
+{
+    float $result = $input[0];
+    for ($i = 1; $i < size($input); $i++)
+        $result = pow($result, $input[$i]);
+    return $result;
+}
+
+global proc float Mean(float $input[])
+{
+    return (Addition($input) / size($input));
+}
+
+global proc float Median(float $input[])
+{
+    int $size = size($input);
+    float $sorted[] = `sort $input`;
+
+    if ($size % 2 == 0)
+        return ($sorted[$size/2 - 1] + $sorted[$size/2]) / 2;
+    else
+        return $sorted[$size/2];
+}
+
+// ------------------
+// Dispatcher
+// ------------------
+global proc float doCalculation(string $funct, float $arry[])
+{
+    if ($funct == "Addition") return Addition($arry);
+    if ($funct == "Subtraction") return Subtraction($arry);
+    if ($funct == "Multiplication") return Multiplication($arry);
+    if ($funct == "Division") return Division($arry);
+    if ($funct == "Power") return Power($arry);
+    if ($funct == "Mean") return Mean($arry);
+    if ($funct == "Median") return Median($arry);
+
+    warning("Unknown function: " + $funct);
+    return 0;
+}
+
+// ------------------
+// Button Logic
+// ------------------
+global proc calcButtonPress(string $symbol)
+{
+    global string $calcDisplay;
+    global string $calcOperation;
+
+    string $current = `textField -q -tx $calcDisplay`;
+
+    if ($symbol == "C")
+    {
+        textField -e -tx "" $calcDisplay;
+    }
+    else if ($symbol == "=")
+    {
+        string $raw = `textField -q -tx $calcDisplay`;
+        if ($raw == "")
+        {
+            warning("Enter some numbers first.");
+            return;
+        }
+
+        string $tokens[] = stringToStringArray($raw, " ");
+        float $values[];
+
+        for ($i = 0; $i < size($tokens); $i++)
+            $values[$i] = float($tokens[$i]);
+
+        float $result = `doCalculation $calcOperation $values`;
+        textField -e -tx ("Result: " + $result) $calcDisplay;
+    }
+    else if ($symbol == " ")
+    {
+        textField -e -tx ($current + " ") $calcDisplay;
+    }
+    else
+    {
+        textField -e -tx ($current + $symbol) $calcDisplay;
+    }
+}
+
+// ------------------
+// Operation Setter
+// ------------------
+global proc setCalcOperation(string $op)
+{
+    global string $calcOperation;
+    $calcOperation = $op;
+    print("\nOperation set to: " + $op + "\n");
+}
+
+// ------------------
+// UI Creation
+// ------------------
+global proc CalculatorUI()
+{
+    global string $calcDisplay;
+
+    if (`window -exists CalculatorWin`)
+        deleteUI CalculatorWin;
+
+    window -title "Calculator" -widthHeight 260 400 CalculatorWin;
+
+    columnLayout -adj true -rs 5;
+
+    // Assign text field name to global
+    $calcDisplay = `textField -editable false -tx "" -h 40`;
+
+    // Operation buttons (no columnWidthArray)
+    frameLayout -label "Operation" -collapsable false;
+    rowColumnLayout -numberOfColumns 3;
+        button -label "+"        -command "setCalcOperation(\"Addition\")";
+        button -label "-"     -command "setCalcOperation(\"Subtraction\")";
+        button -label "x"  -command "setCalcOperation(\"Multiplication\")";
+        button -label "/"        -command "setCalcOperation(\"Division\")";
+        button -label "Mean"            -command "setCalcOperation(\"Mean\")";
+        button -label "Median"          -command "setCalcOperation(\"Median\")";
+        button -label "Power"           -command "setCalcOperation(\"Power\")";
+    setParent ..; setParent ..;
+
+    // Number entry buttons
+    gridLayout -numberOfColumns 4 -cellWidthHeight 55 40;
+    string $buttons[] = {
+        "7","8","9"," ",
+        "4","5","6"," ",
+        "1","2","3"," ",
+        "0",".","=","C"
+    };
+
+    for ($b in $buttons)
+    {
+        if ($b == "C")
+            button -label $b -bgc 0.8 0.3 0.3 -command ("calcButtonPress(\"" + $b + "\")");
+        else if ($b == "=")
+            button -label $b -bgc 0.3 0.7 0.3 -command ("calcButtonPress(\"" + $b + "\")");
+        else if ($b == " ")
+            button -label "Space" -command ("calcButtonPress(\" \")");
+        else
+            button -label $b -command ("calcButtonPress(\"" + $b + "\")");
+    }
+
+    setParent ..;
+    showWindow CalculatorWin;
+}
+
+// ------------------
+// Run it
+// ------------------
+CalculatorUI();

@@ -1,0 +1,112 @@
+
+global proc float Addition(float $input[])
+{
+    float $result = 0;
+    for ($i = 0; $i<size($input); $i++)
+    {
+        $result += $input[$i];
+    }
+    return $result;
+}
+
+global proc float Subtraction(float $input[])
+{
+    float $result = 0;
+    for ($i = 0; $i<size($input); $i++)
+    {
+        $result -= $input[$i];
+    }
+    return $result;
+}
+
+global proc float Multiplication(float $input[])
+{
+    float $result = 0;
+    for ($i = 0; $i<size($input); $i++)
+    {
+        $result *= $input[$i];
+    }
+    return $result;
+}
+
+global proc float Division(float $input[])
+{
+    float $result = 0;
+    for ($i = 0; $i<size($input); $i++)
+    {
+        $result /= $input[$i];
+    }
+    return $result;
+}
+
+global proc float Power(float $input[])
+{
+    float $result = $input[0];
+    for ($i = 0; $i<size($input); $i++)
+    {
+        $result += pow($result, $input[$i]);
+    }
+    return $result;
+}
+
+global proc float Mean(float $input[])
+//Add all up and divide em
+{
+    float $sum = Addition($input);
+    return $sum / size($input);
+}
+
+global proc float Median(float $input[])
+//Floor rounds down
+{
+    int $size = size($input);
+    float $sorted[] = `sort $input`;
+
+    if($size % 2 == 0)
+    {
+        return ($sorted[$size/2 -1] + $sorted[$size/2]) / 2;
+    }
+    else
+    {
+        return $sorted[$size/2];
+    }
+}
+
+global proc Calculator(string $funct, float $arry[])
+//Just add more functions in and you're done.
+{
+    if($funct == "Addition")
+    {
+        print("Sum: " + Addition($arry));
+    }
+    else if($funct == "Subtraction")
+    {
+        print("Difference: " + Subtraction($arry));
+    }
+    else if($funct == "Multiplication")
+    {
+        print("Product: " + Multiplication($arry));
+    }
+    else if($funct == "Division")
+    {
+        print("Quotient: " + Division($arry));
+    }
+    else if($funct == "Power")
+    {
+        print("Power: " + Power($arry));
+    }
+    else if($funct == "Mean")
+    {
+        print("Mean: " + Mean($arry));
+    }
+    else if($funct == "Median")
+    {
+        print("Median: " + Median($arry));
+    }
+    else
+    {
+        print("Function not recognized");
+    }
+}
+
+//Calculator("Median", {33 2 4});
